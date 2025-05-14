@@ -7,4 +7,5 @@ public class Story : RepoItem<int>
   public string CoverImg { get; set; }
   public int LikeCount { get; set; }
   public string AuthorId { get; set; }
+  public Profile Creator { get; set; }
 }

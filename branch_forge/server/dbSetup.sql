@@ -20,3 +20,5 @@ CREATE TABLE stories (
 )
 
 SELECT * FROM stories;
+
+SELECT * FROM accounts;
