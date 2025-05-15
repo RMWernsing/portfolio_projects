@@ -14,13 +14,14 @@ public class StoriesRepository
     string sql = @"
     INSERT INTO 
     stories(description, title, cover_img, like_count, author_id)
-    VALUES(@Description, @Title, @CoverImg, @LikeCount, @AuthorId)
+    VALUES(@Description, @Title, @CoverImg, @LikeCount, @AuthorId);
 
     SELECT 
     stories.*,
     accounts.*
+    FROM stories
     INNER JOIN accounts ON accounts.id = stories.author_id
-    WHERE stories.id = LAST_CREATED_ID();
+    WHERE stories.id = LAST_INSERT_ID();
     ";
 
     Story createdStory = _db.Query(sql, (Story story, Profile account) =>
