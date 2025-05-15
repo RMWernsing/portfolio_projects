@@ -29,4 +29,18 @@ public class StoriesController : ControllerBase
     }
 
   }
+
+  [HttpGet]
+  public ActionResult<List<Story>> GetAllStories()
+  {
+    try
+    {
+      List<Story> stories = _storiesService.GetAllStories();
+      return Ok(stories);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }
