@@ -1,5 +1,6 @@
 
 
+
 namespace branch_forge.Services;
 
 public class StoriesService
@@ -20,5 +21,15 @@ public class StoriesService
   {
     List<Story> stories = _repository.GetAllStories();
     return stories;
+  }
+
+  internal Story GetStoryById(int storyId)
+  {
+    Story story = _repository.GetStoryById(storyId);
+    if (story == null)
+    {
+      throw new Exception("Invalid id: " + storyId);
+    }
+    return story;
   }
 }

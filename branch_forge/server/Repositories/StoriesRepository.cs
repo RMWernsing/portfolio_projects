@@ -1,5 +1,6 @@
 
 
+
 namespace branch_forge.Repositories;
 
 public class StoriesRepository
@@ -48,6 +49,25 @@ public class StoriesRepository
       return story;
     }).ToList();
     return stories;
+  }
+
+  internal Story GetStoryById(int storyId)
+  {
+    string sql = @"
+    SELECT 
+    stories.*,
+    accounts.*
+    FROM stories
+    INNER JOIN accounts ON accounts.id = stories.author_id
+    WHERE stories.id = @storyId;";
+
+    Story story = _db.Query(sql, (Story story, Profile account) =>
+    {
+      story.Creator = account;
+      return story;
+    }, new { storyId }).SingleOrDefault();
+
+    return story;
   }
   // TODO fix the postman test. something is not right
 }

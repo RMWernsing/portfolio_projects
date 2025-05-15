@@ -43,4 +43,18 @@ public class StoriesController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [HttpGet("{storyId}")]
+  public ActionResult<Story> GetStoryById(int storyId)
+  {
+    try
+    {
+      Story story = _storiesService.GetStoryById(storyId);
+      return Ok(story);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }
