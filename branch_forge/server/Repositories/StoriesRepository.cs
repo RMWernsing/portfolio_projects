@@ -88,5 +88,16 @@ public class StoriesRepository
     }
   }
 
+  internal void DeleteStory(int storyId)
+  {
+    String sql = "DELETE FROM stories WHERE id = @storyId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { storyId });
+    if (rowsAffected != 1)
+    {
+      throw new Exception(rowsAffected + " stories were deleted. Please ensure no unnecessary data was deleted");
+    }
+  }
+
   // TODO fix the postman test. something is not right
 }

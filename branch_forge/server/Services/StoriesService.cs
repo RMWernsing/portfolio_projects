@@ -48,4 +48,17 @@ public class StoriesService
     _repository.EditStory(story);
     return story;
   }
+
+  internal string DeleteStory(Account userInfo, int storyId)
+  {
+    Story story = GetStoryById(storyId);
+    if (story.AuthorId != userInfo.Id)
+    {
+      throw new Exception("YOU DO NOT HAVE PERMISSION TO DELETE SOMEONE ELSES STORY!");
+    }
+    _repository.DeleteStory(storyId);
+    // NOTE this is creating a variable that puts quotes around the story's title
+    char quote = '"';
+    return $"The story named {quote}{story.Title}{quote} has been deleted successfully!";
+  }
 }

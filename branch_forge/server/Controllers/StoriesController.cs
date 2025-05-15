@@ -73,4 +73,20 @@ public class StoriesController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [Authorize]
+  [HttpDelete("{storyId}")]
+  public async Task<ActionResult<String>> DeleteStory(int storyId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      String message = _storiesService.DeleteStory(userInfo, storyId);
+      return Ok(message);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }
