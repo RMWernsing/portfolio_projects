@@ -57,4 +57,20 @@ public class StoriesController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [Authorize]
+  [HttpPut("{storyId}")]
+  public async Task<ActionResult<Story>> EditStory([FromBody] Story storyData, int storyId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Story story = _storiesService.EditStory(storyData, storyId, userInfo);
+      return Ok(story);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

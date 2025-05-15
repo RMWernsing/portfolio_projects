@@ -1,6 +1,7 @@
 
 
 
+
 namespace branch_forge.Repositories;
 
 public class StoriesRepository
@@ -69,5 +70,23 @@ public class StoriesRepository
 
     return story;
   }
+
+  internal void EditStory(Story story)
+  {
+    string sql = @"
+    UPDATE stories
+    SET 
+    description = @Description,
+    title = @Title,
+    cover_img = @CoverImg
+    WHERE id = @Id LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, story);
+    if (rowsAffected != 1)
+    {
+      throw new Exception(rowsAffected + " rows were affected. please ensure no unnecessary data was changed");
+    }
+  }
+
   // TODO fix the postman test. something is not right
 }
