@@ -27,9 +27,13 @@ async function getStories() {
 </script>
 
 <template>
-  <div v-for="story in stories" :key="story.id">
-    <StoryCard :story="story" />
-  </div>
+  <section class="container-fluid mt-3">
+    <div class="row">
+      <div v-for="story in stories" :key="story.id" class="col-md-4">
+        <StoryCard :story="story" />
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped lang="scss"></style>
