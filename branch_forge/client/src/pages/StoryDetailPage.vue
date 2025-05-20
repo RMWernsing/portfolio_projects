@@ -4,9 +4,10 @@ import { storiesService } from '@/services/StoriesService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute()
+const router = useRouter()
 const story = computed(() => AppState.activeStory)
 const account = computed(() => AppState.account)
 
@@ -31,6 +32,8 @@ async function deleteStory() {
       return
     }
     await storiesService.deleteStory(route.params.storyId)
+    router.push({ name: 'Home' })
+    Pop.success(`Successfully deleted ${story.value.title}`)
   }
   catch (error) {
     Pop.error(error, 'Could not delete story')
