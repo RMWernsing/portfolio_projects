@@ -4,6 +4,12 @@ import { AppState } from "@/AppState.js"
 import { Story } from "@/models/Story.js"
 
 class StoriesService {
+  async createStory(storyData) {
+    const response = await api.post('api/stories', storyData)
+    // logger.log('here is your new story!', response.data)
+    const story = new Story(response.data)
+    AppState.stories.push(story)
+  }
   async deleteStory(storyId) {
     const response = await api.delete(`api/stories/${storyId}`)
     logger.log('your story has been deleted', response.data)

@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import CreateStoryForm from '@/components/CreateStoryForm.vue';
 import Example from '@/components/Example.vue';
 import StoryCard from '@/components/StoryCard.vue';
 import { storiesService } from '@/services/StoriesService.js';
@@ -30,11 +31,14 @@ async function getStories() {
   <section class="container-fluid mt-3">
     <div class="row">
       <div v-for="story in stories" :key="story.id" class="col-md-4">
-        <StoryCard :story="story" />
+        <div class="mb-3">
+          <StoryCard :story="story" />
+        </div>
       </div>
     </div>
   </section>
-  <button class="btn btn-indigo">Create Story</button>
+  <button data-bs-toggle="modal" data-bs-target="#createStoryModal" class="btn btn-indigo">Create Story</button>
+  <CreateStoryForm />
 </template>
 
 <style scoped lang="scss">
