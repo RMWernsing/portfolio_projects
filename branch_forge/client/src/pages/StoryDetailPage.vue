@@ -8,6 +8,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const story = computed(() => AppState.activeStory)
+const account = computed(() => AppState.account)
 
 onMounted(() => {
   getStoryById()
@@ -22,15 +23,29 @@ async function getStoryById() {
     logger.error('COULD NOT GET STORY', error)
   }
 }
+
+async function deleteStory() {
+  try {
+    const confirm = await Pop.confirm('Are you sure you want to delete this story?', 'If you do, it will be gone forever')
+    if (!confirm) {
+      return
+    }
+    await storiesService.deleteStory(route.params.storyId)
+  }
+  catch (error) {
+    Pop.error(error, 'Could not delete story')
+    logger.error("COULD NOT DELETE STORY", error)
+  }
+}
 </script>
 
 <template>
   <section v-if="story" class="container mt-3">
     <div class="row justify-content-center">
       <div class="col-9">
-        <div class="row justify-content-between align-items-center">
+        <div v-if="account?.id == story?.authorId" class="row justify-content-between align-items-center">
           <div class="col-4">
-            <button class="btn btn-danger">Delete Story</button>
+            <button @click="deleteStory()" class="btn btn-danger">Delete Story</button>
           </div>
           <div class="col-4">
             <div class="d-flex justify-content-end">

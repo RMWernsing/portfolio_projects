@@ -4,6 +4,10 @@ import { AppState } from "@/AppState.js"
 import { Story } from "@/models/Story.js"
 
 class StoriesService {
+  async deleteStory(storyId) {
+    const response = await api.delete(`api/stories/${storyId}`)
+    logger.log('your story has been deleted', response.data)
+  }
   async getStoryById(storyId) {
     AppState.activeStory = null
     const response = await api.get(`api/stories/${storyId}`)
