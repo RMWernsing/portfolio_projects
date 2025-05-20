@@ -34,6 +34,14 @@ async function getStories() {
       </div>
     </div>
   </section>
+  <button class="btn btn-indigo">Create Story</button>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  ;
+}
+</style>
