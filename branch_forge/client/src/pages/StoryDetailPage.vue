@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import EditStoryForm from '@/components/EditStoryForm.vue';
 import { storiesService } from '@/services/StoriesService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -40,6 +41,7 @@ async function deleteStory() {
     logger.error("COULD NOT DELETE STORY", error)
   }
 }
+
 </script>
 
 <template>
@@ -52,7 +54,7 @@ async function deleteStory() {
           </div>
           <div class="col-4">
             <div class="d-flex justify-content-end">
-              <button class="btn btn-indigo">Edit Story</button>
+              <button class="btn btn-indigo" data-bs-toggle="modal" data-bs-target="#editStoryModal">Edit Story</button>
             </div>
           </div>
         </div>
@@ -62,12 +64,18 @@ async function deleteStory() {
           <img class="rounded-4" :src="story.coverImg" :alt="`cover image for ${story.title}`">
         </div>
         <div>
+          <div class="d-flex justify-content-center my-3">
+            <button class="btn btn-success">Play Story</button>
+          </div>
+        </div>
+        <div>
           <h1 class="text-center mt-2">{{ story.title }}</h1>
           <p>{{ story.description }}</p>
         </div>
       </div>
     </div>
   </section>
+  <EditStoryForm />
 </template>
 
 <style lang="scss" scoped>

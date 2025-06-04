@@ -39,6 +39,9 @@ public class Startup
 
     services.AddScoped<StoriesRepository>();
     services.AddScoped<StoriesService>();
+
+    services.AddScoped<StoryNodesRepository>();
+    services.AddScoped<StoryNodesService>();
   }
 
   private void ConfigureCors(IServiceCollection services)

@@ -4,6 +4,12 @@ import { AppState } from "@/AppState.js"
 import { Story } from "@/models/Story.js"
 
 class StoriesService {
+  async editStory(storyData, id) {
+    const response = await api.put(`api/stories/${id}`, storyData)
+    // logger.log('your story was edited successfully', response.data)
+    const story = new Story(response.data)
+    AppState.activeStory = story
+  }
   async createStory(storyData) {
     const response = await api.post('api/stories', storyData)
     // logger.log('here is your new story!', response.data)
