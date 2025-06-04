@@ -1,3 +1,5 @@
+
+
 namespace branch_forge.Services;
 
 public class StoryNodesService
@@ -8,4 +10,15 @@ public class StoryNodesService
   }
   private readonly StoryNodesRepository _repository;
 
+  internal StoryNode CreateStoryNode(StoryNode storyNodeData)
+  {
+    StoryNode storyNode = _repository.CreateStory(storyNodeData);
+    return storyNode;
+  }
+
+  internal StoryNode GetFirstStoryNode(int storyId)
+  {
+    StoryNode storyNode = _repository.GetFirstStoryNode(storyId);
+    return storyNode;
+  }
 }

@@ -34,3 +34,5 @@ SELECT * FROM stories;
 SELECT * FROM accounts;
 
 SELECT * FROM story_nodes;
+
+SELECT * FROM story_nodes WHERE story_id = 1;
