@@ -27,7 +27,9 @@ public class StoryNodesRepository
   internal StoryNode GetFirstStoryNode(int storyId)
   {
     string sql = @"
-    SELECT * FROM story_node WHERE story_id = @storyId
+    SELECT * FROM story_nodes WHERE story_id = @storyId ORDER BY id ASC LIMIT 1;
     ";
+    StoryNode storyNode = _db.Query<StoryNode>(sql, new { storyId }).SingleOrDefault();
+    return storyNode;
   }
 }

@@ -36,3 +36,5 @@ SELECT * FROM accounts;
 SELECT * FROM story_nodes;
 
 SELECT * FROM story_nodes WHERE story_id = 1;
+
+SELECT * FROM story_nodes ORDER BY id ASC LIMIT 1;

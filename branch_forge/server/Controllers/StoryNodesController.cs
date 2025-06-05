@@ -27,7 +27,7 @@ public class StoryNodesController : ControllerBase
     }
   }
 
-  [HttpGet("{storyId}")]
+  [HttpGet("{storyId}/first")]
   public ActionResult<StoryNode> GetFirstStoryNode(int storyId)
   {
     try
