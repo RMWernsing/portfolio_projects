@@ -1,6 +1,7 @@
 
 
 
+
 namespace branch_forge.Repositories;
 
 public class StoryNodesRepository
@@ -38,5 +39,13 @@ public class StoryNodesRepository
     string sql = @"SELECT * FROM story_nodes WHERE story_id = @storyId";
     List<StoryNode> storyNodes = _db.Query<StoryNode>(sql, new { storyId }).ToList();
     return storyNodes;
+  }
+
+  internal StoryNode GetStoryNodeById(int storyNodeId)
+  {
+    string sql = "SELECT * FROM story_nodes WHERE id = @storyNodeId";
+
+    StoryNode storyNode = _db.Query<StoryNode>(sql, new { storyNodeId }).SingleOrDefault();
+    return storyNode;
   }
 }

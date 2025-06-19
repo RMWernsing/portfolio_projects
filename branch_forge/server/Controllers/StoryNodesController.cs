@@ -41,13 +41,27 @@ public class StoryNodesController : ControllerBase
     }
   }
 
-  [HttpGet("{storyId}")]
+  [HttpGet("{storyId}/story")]
   public ActionResult<List<StoryNode>> GetAllStoryNodesForStory(int storyId)
   {
     try
     {
       List<StoryNode> storyNodes = _storyNodesService.GetAllStoryNodesForStory(storyId);
       return Ok(storyNodes);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
+  [HttpGet("{storyNodeId}")]
+  public ActionResult<StoryNode> GetStoryNodeById(int storyNodeId)
+  {
+    try
+    {
+      StoryNode storyNode = _storyNodesService.GetStoryNodeById(storyNodeId);
+      return Ok(storyNode);
     }
     catch (Exception exception)
     {

@@ -1,6 +1,7 @@
 
 
 
+
 namespace branch_forge.Services;
 
 public class StoryNodesService
@@ -27,5 +28,16 @@ public class StoryNodesService
   {
     List<StoryNode> storyNodes = _repository.GetAllStoryNodesForStory(storyId);
     return storyNodes;
+  }
+
+  internal StoryNode GetStoryNodeById(int storyNodeId)
+  {
+    StoryNode storyNode = _repository.GetStoryNodeById(storyNodeId);
+    // Null Check to be abstracted when this method is called in other places
+    if (storyNode == null)
+    {
+      throw new Exception("Invalid Id: " + storyNodeId + " Your story does not exist.");
+    }
+    return storyNode;
   }
 }
