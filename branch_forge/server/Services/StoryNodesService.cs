@@ -41,13 +41,17 @@ public class StoryNodesService
     return storyNode;
   }
 
-  // internal StoryNode EditStoryNode(int storyNodeId, Account userInfo)
-  // {
-  //   StoryNode storyNode = GetStoryNodeById(storyNodeId);
-  //   if (true)
-  //   {
+  internal StoryNode EditStoryNode(StoryNode storyNodeData, int storyNodeId, Account userInfo)
+  {
+    StoryNode storyNode = GetStoryNodeById(storyNodeId);
+    if (storyNode.CreatorId != userInfo.Id)
+    {
+      throw new Exception("YOU DO NOT HAVE PERMISSION TO EDIT ANOTHER PERSONS STORY NODE!");
+    }
+    storyNode.Body = storyNodeData.Body ?? storyNode.Body;
+    storyNode.IsEnding = storyNodeData.IsEnding ?? storyNode.IsEnding;
 
-  //   }
-
-  // }
+    _repository.EditStoryNode(storyNode);
+    return storyNode;
+  }
 }

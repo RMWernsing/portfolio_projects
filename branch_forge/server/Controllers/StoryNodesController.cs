@@ -71,19 +71,19 @@ public class StoryNodesController : ControllerBase
     }
   }
 
-  // [Authorize]
-  // [HttpPut("{storyNodeId}")]
-  // public async Task<ActionResult<StoryNode>> EditStoryNode(int storyNodeId)
-  // {
-  //   try
-  //   {
-  //     Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-  //     StoryNode storyNode = _storyNodesService.EditStoryNode(storyNodeId, userInfo);
-  //     return Ok(storyNode);
-  //   }
-  //   catch (Exception exception)
-  //   {
-  //     return BadRequest(exception.Message);
-  //   }
-  // }
+  [Authorize]
+  [HttpPut("{storyNodeId}")]
+  public async Task<ActionResult<StoryNode>> EditStoryNode([FromBody] StoryNode storyNodeData, int storyNodeId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      StoryNode storyNode = _storyNodesService.EditStoryNode(storyNodeData, storyNodeId, userInfo);
+      return Ok(storyNode);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

@@ -2,6 +2,7 @@
 
 
 
+
 namespace branch_forge.Repositories;
 
 public class StoryNodesRepository
@@ -47,5 +48,21 @@ public class StoryNodesRepository
 
     StoryNode storyNode = _db.Query<StoryNode>(sql, new { storyNodeId }).SingleOrDefault();
     return storyNode;
+  }
+
+  internal void EditStoryNode(StoryNode storyNode)
+  {
+    string sql = @"
+    UPDATE story_nodes
+    SET 
+    body = @Body,
+    is_ending = @IsEnding
+    WHERE id = @Id LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, storyNode);
+    if (rowsAffected != 1)
+    {
+      throw new Exception(rowsAffected + " rows were affected. Somethings went wrong please check to make sure your data is intact.");
+    }
   }
 }
