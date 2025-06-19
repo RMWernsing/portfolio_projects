@@ -25,8 +25,10 @@ CREATE TABLE story_nodes (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     body VARCHAR(1000) NOT NULL,
     is_ending BOOLEAN NOT NULL DEFAULT FALSE,
-    story_id INT,
-    FOREIGN KEY (story_id) REFERENCES stories (id) ON DELETE CASCADE
+    story_id INT NOT NULL,
+    creator_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (story_id) REFERENCES stories (id) ON DELETE CASCADE,
+    FOREIGN KEY (creator_id) REFERENCES accounts (id) ON DELETE CASCADE
 )
 
 SELECT * FROM stories;
@@ -38,3 +40,7 @@ SELECT * FROM story_nodes;
 SELECT * FROM story_nodes WHERE story_id = 1;
 
 SELECT * FROM story_nodes ORDER BY id ASC LIMIT 1;
+
+DELETE FROM story_nodes;
+
+DROP TABLE story_nodes;

@@ -16,8 +16,8 @@ public class StoryNodesRepository
   {
     string sql = @"
     INSERT INTO 
-    story_nodes(body, is_ending, story_id)
-    VALUES(@Body, @IsEnding, @StoryId);
+    story_nodes(body, is_ending, story_id, creator_id)
+    VALUES(@Body, @IsEnding, @StoryId, @CreatorId);
 
     SELECT * FROM story_nodes WHERE id = LAST_INSERT_ID();
     ";

@@ -40,4 +40,14 @@ public class StoryNodesService
     }
     return storyNode;
   }
+
+  // internal StoryNode EditStoryNode(int storyNodeId, Account userInfo)
+  // {
+  //   StoryNode storyNode = GetStoryNodeById(storyNodeId);
+  //   if (true)
+  //   {
+
+  //   }
+
+  // }
 }

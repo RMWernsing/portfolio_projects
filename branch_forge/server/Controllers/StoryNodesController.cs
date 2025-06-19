@@ -14,10 +14,12 @@ public class StoryNodesController : ControllerBase
 
   [Authorize]
   [HttpPost]
-  public ActionResult<StoryNode> CreateStoryNode([FromBody] StoryNode storyNodeData)
+  public async Task<ActionResult<StoryNode>> CreateStoryNode([FromBody] StoryNode storyNodeData)
   {
     try
     {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      storyNodeData.CreatorId = userInfo.Id;
       StoryNode storyNode = _storyNodesService.CreateStoryNode(storyNodeData);
       return Ok(storyNode);
     }
@@ -68,4 +70,20 @@ public class StoryNodesController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  // [Authorize]
+  // [HttpPut("{storyNodeId}")]
+  // public async Task<ActionResult<StoryNode>> EditStoryNode(int storyNodeId)
+  // {
+  //   try
+  //   {
+  //     Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+  //     StoryNode storyNode = _storyNodesService.EditStoryNode(storyNodeId, userInfo);
+  //     return Ok(storyNode);
+  //   }
+  //   catch (Exception exception)
+  //   {
+  //     return BadRequest(exception.Message);
+  //   }
+  // }
 }
