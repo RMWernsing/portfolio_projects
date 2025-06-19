@@ -40,4 +40,18 @@ public class StoryNodesController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [HttpGet("{storyId}")]
+  public ActionResult<List<StoryNode>> GetAllStoryNodesForStory(int storyId)
+  {
+    try
+    {
+      List<StoryNode> storyNodes = _storyNodesService.GetAllStoryNodesForStory(storyId);
+      return Ok(storyNodes);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

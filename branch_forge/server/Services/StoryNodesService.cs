@@ -1,5 +1,6 @@
 
 
+
 namespace branch_forge.Services;
 
 public class StoryNodesService
@@ -20,5 +21,11 @@ public class StoryNodesService
   {
     StoryNode storyNode = _repository.GetFirstStoryNode(storyId);
     return storyNode;
+  }
+
+  internal List<StoryNode> GetAllStoryNodesForStory(int storyId)
+  {
+    List<StoryNode> storyNodes = _repository.GetAllStoryNodesForStory(storyId);
+    return storyNodes;
   }
 }
