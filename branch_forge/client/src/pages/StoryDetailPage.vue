@@ -52,6 +52,12 @@ async function deleteStory() {
           <div class="col-4">
             <button @click="deleteStory()" class="btn btn-danger">Delete Story</button>
           </div>
+          <div class="col-4 d-flex justify-content-center">
+            <RouterLink :to="{ name: 'StoryNode', params: { storyId: route.params.storyId } }">
+              <button class="btn btn-success">Write
+                Story</button>
+            </RouterLink>
+          </div>
           <div class="col-4">
             <div class="d-flex justify-content-end">
               <button class="btn btn-indigo" data-bs-toggle="modal" data-bs-target="#editStoryModal">Edit Story</button>

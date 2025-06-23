@@ -22,6 +22,11 @@ const routes = [
     component: loadPage('StoryDetailPage')
   },
   {
+    path: '/storyNode/:storyId',
+    name: 'StoryNode',
+    component: loadPage('StoryNodePage')
+  },
+  {
     path: '/account',
     name: 'Account',
     component: loadPage('AccountPage'),
