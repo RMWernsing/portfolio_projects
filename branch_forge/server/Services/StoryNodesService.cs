@@ -54,4 +54,15 @@ public class StoryNodesService
     _repository.EditStoryNode(storyNode);
     return storyNode;
   }
+
+  internal string DelteStoryNode(int storyNodeId, Account userInfo)
+  {
+    StoryNode storyNode = GetStoryNodeById(storyNodeId);
+    if (storyNode.CreatorId != userInfo.Id)
+    {
+      throw new Exception("YOU CANNOT DELETE SOMEONE ELSES STORY NODE " + userInfo.Name.ToUpper() + "!!!");
+    }
+    _repository.DeleteStoryNode(storyNodeId);
+    return "Your Story Node has been deleted";
+  }
 }

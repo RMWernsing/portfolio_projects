@@ -86,4 +86,20 @@ public class StoryNodesController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [Authorize]
+  [HttpDelete("{StoryNodeId}")]
+  public async Task<ActionResult<string>> DeleteStoryNode(int StoryNodeId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      string message = _storyNodesService.DelteStoryNode(StoryNodeId, userInfo);
+      return Ok(message);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

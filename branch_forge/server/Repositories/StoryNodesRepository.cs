@@ -62,7 +62,19 @@ public class StoryNodesRepository
     int rowsAffected = _db.Execute(sql, storyNode);
     if (rowsAffected != 1)
     {
-      throw new Exception(rowsAffected + " rows were affected. Somethings went wrong please check to make sure your data is intact.");
+      throw new Exception(rowsAffected + " rows were affected. Somethings went wrong. Please check to make sure your data is intact.");
+    }
+  }
+
+  internal void DeleteStoryNode(int storyNodeId)
+  {
+    string sql = @"DELETE FROM story_nodes WHERE id = @storyNodeId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { storyNodeId });
+
+    if (rowsAffected != 1)
+    {
+      throw new Exception(rowsAffected + " rows were affected. Something went wrong. Please check to make sure your data is intact.");
     }
   }
 }
